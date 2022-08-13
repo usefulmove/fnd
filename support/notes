@@ -1,0 +1,14 @@
+examples
+% fnd *.csv ( file glob patterns )
+% fnd "*.csv"
+% fnd glob *.csv ( ? )
+% fnd foobar
+% fnd "foobar"
+% fnd exp "^[<>=]{3}" ( regex )
+% fnd ~ ./trunk ( specify multiple paths )
+
+only directories
+% fnd dir foobar
+
+only files
+% fnd file foobar
