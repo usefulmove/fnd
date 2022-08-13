@@ -33,9 +33,15 @@ fn main() {
         _ => ()
     }
 
-    // 
-
     println!("execute fnd here: ( % fnd {} )", args[1]);
+
+    // 0.2.0 - simple search
+    let search_term: String = args[1].clone();
+
+    println!("simple search: {}", search_term);
+
+
+
 
 
 }
