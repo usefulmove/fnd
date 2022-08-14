@@ -5,7 +5,7 @@ use walkdir::{WalkDir, DirEntry};
 
 mod poc;
 
-const RELEASE_STATE: &str = "b";
+const RELEASE_STATE: &str = "c";
 
 fn main() {
     // enable or disable backtrace on error
