@@ -57,7 +57,11 @@ fn main() {
             //println!("  {}", path_str); // debug
             println!(
                 "  {}",
-                poc::highlight(path_str, &search_term),
+                //poc::highlight(path_str, &search_term),
+                poc::highlight(
+                    path_str,
+                    &search_term
+                ),
             );
         }
     }
