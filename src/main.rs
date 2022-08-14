@@ -13,11 +13,6 @@ fn main() {
     // get command arguments
     let mut args: Vec<String> = env::args().collect();
 
-    // if no arguments are passed, behave as if help flag was passed : TODO - remove to allow "fnd" same as "fnd ."?
-    if args.len() <= 1 {
-        args.push("help".to_string());
-    }
-
     //println!("{:#?}", args); // debug
 
     match args[1].as_str() {
@@ -28,7 +23,7 @@ fn main() {
         }
         "--version" | "version" => {
             // display version information
-            println!("{}{}", env!("CARGO_PKG_VERSION"), RELEASE_STATE);
+            println!("  {}{}", env!("CARGO_PKG_VERSION"), RELEASE_STATE);
             return;
         }
         _ => ()
@@ -52,5 +47,5 @@ fn main() {
 
 fn show_help() {
     //TODO
-    println!("\"( oh! hola. need some halp? )\"");
+    println!("  \"( oh! hola. need some halp? )\"");
 }
