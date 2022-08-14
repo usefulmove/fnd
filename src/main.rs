@@ -2,6 +2,7 @@ use::colored::*;
 use std::env;
 use std::fs;
 use std::path::Path;
+use walkdir::WalkDir;
 
 const RELEASE_STATE: &str = "a";
 
@@ -17,7 +18,7 @@ fn main() {
         args.push("help".to_string());
     }
 
-    println!("{:#?}", args);
+    //println!("{:#?}", args); // debug
 
     match args[1].as_str() {
         "--help" | "help" => {
@@ -33,16 +34,19 @@ fn main() {
         _ => ()
     }
 
-    println!("execute fnd here: ( % fnd {} )", args[1]);
+    // execute fnd core
 
     // 0.2.0 - simple search
     let search_term: String = args[1].clone();
 
-    println!("simple search: {}", search_term);
-
-
-
-
+    for entry in WalkDir::new("./") {
+        let entry = entry.unwrap();
+        let path = entry.path();
+        let path_str = path.to_str().unwrap();
+        if path_str.contains(&search_term) {
+            println!("{}", path_str);
+        }
+    }
 
 }
 
