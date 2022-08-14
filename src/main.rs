@@ -48,6 +48,7 @@ fn main() {
         let path_str: &str = path.to_str().unwrap();
         if path_str.contains(&search_term) {
             println!("  {}", path_str);
+            println!("  {:#?}", path_str.to_string().split(&search_term).collect::<Vec<&str>>());
         }
     }
 
