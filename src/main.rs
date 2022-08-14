@@ -47,10 +47,11 @@ fn main() {
         let path: &Path = entry.path();
         let path_str: &str = path.to_str().unwrap();
         if path_str.contains(&search_term) {
-            println!("{}", path_str);
+            println!("  {}", path_str);
         }
     }
 
+    std::process::exit(0);
 }
 
 fn show_help() {
