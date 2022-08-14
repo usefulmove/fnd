@@ -27,12 +27,12 @@ fn main() {
     }
 
     match args[1].as_str() {
-        "--help" | "help" => {
+        "--help" => {
             // display command usage information
             show_help();
             return;
         }
-        "--version" | "version" => {
+        "--version" => {
             // display version information
             println!("  {}{}", env!("CARGO_PKG_VERSION"), RELEASE_STATE);
             return;
