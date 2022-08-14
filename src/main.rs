@@ -15,12 +15,15 @@ fn main() {
 
     //println!("{:#?}", args); // debug
 
-    if args.len() <= 1 {
+    if args.len() <= 1 { // no arguments
         for entry in WalkDir::new("./") {
             let entry: DirEntry = entry.unwrap();
             let path: &Path = entry.path();
             let path_str: &str = path.to_str().unwrap();
-            println!("{}", path_str);
+            println!(
+                "  {}",
+                poc::highlight_filename(path_str),
+            );
         }
         return;
     }
@@ -57,10 +60,10 @@ fn main() {
             //println!("  {}", path_str); // debug
             println!(
                 "  {}",
-                //poc::highlight(path_str, &search_term),
                 poc::highlight(
                     path_str,
-                    &search_term
+                    &search_term,
+                    poc::color_blue_smurf_bold,
                 ),
             );
         }

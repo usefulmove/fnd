@@ -1,4 +1,5 @@
 use colored::*;
+use regex::Regex;
 
 pub fn color_rgb(message: &str, r: u8, g: u8, b: u8) -> ColoredString {
     message.truecolor(r, g, b)
@@ -107,7 +108,7 @@ pub fn format_rgb_hex(r: u8, g: u8, b: u8) -> String {
     )
 }
 
-pub fn highlight(output_string: &str, highlight_term: &str) -> String {
+pub fn highlight(output_string: &str, highlight_term: &str, f_color: fn(&str) -> colored::ColoredString) -> String {
     /* find the highlight term in the output string and format the output 
      * string to emphasize the highlight term in the output string
      */
@@ -126,7 +127,7 @@ pub fn highlight(output_string: &str, highlight_term: &str) -> String {
                 &format!(
                     "{}{}",
                     color_grey_mouse(elements[i]),
-                    color_blue_smurf_bold(highlight_term),
+                    f_color(highlight_term),
                 )
             );
         } else {
@@ -146,5 +147,12 @@ pub fn highlight_filename(output_string: &str) -> String {
     /* highlight everything following the last "/"
      */
 
-    output_string.to_string() //TODO
+    let re: Regex = Regex::new(r"/([^/]+)$").unwrap();
+
+    let filename: String = match re.captures(output_string) {
+        Some(c) => c[1].to_string(),
+        None => "".to_string(),
+    };
+
+    highlight(output_string, &filename, color_white)
 }
