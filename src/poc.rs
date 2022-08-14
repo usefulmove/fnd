@@ -112,10 +112,6 @@ pub fn highlight(output_string: &str, highlight_term: &str) -> String {
      * string to emphasize the highlight term in the output string
      */
 
-    //println!("  {}", output_string); // debug
-
-    //println!("  {:#?}", path_str.to_string().split(&search_term).collect::<Vec<&str>>());
-
     let tmp: String = output_string.clone().to_string();
     let elements: Vec<&str> = tmp.split(&highlight_term).collect::<Vec<&str>>();
 
@@ -144,4 +140,11 @@ pub fn highlight(output_string: &str, highlight_term: &str) -> String {
     }
 
     o
+}
+
+pub fn highlight_filename(output_string: &str) -> String {
+    /* highlight everything following the last "/"
+     */
+
+    output_string.to_string() //TODO
 }
