@@ -1,10 +1,10 @@
 use colored::*;
 
-pub fn color_rgb(message: &str, r: u8, g: u8, b: u8) -> colored::ColoredString {
+pub fn color_rgb(message: &str, r: u8, g: u8, b: u8) -> ColoredString {
     message.truecolor(r, g, b)
 }
 
-pub fn color_rgb_bold(message: &str, r: u8, g: u8, b: u8) -> colored::ColoredString {
+pub fn color_rgb_bold(message: &str, r: u8, g: u8, b: u8) -> ColoredString {
     message.truecolor(r, g, b).bold()
 }
 
@@ -105,4 +105,43 @@ pub fn format_rgb_hex(r: u8, g: u8, b: u8) -> String {
             r, g, b,
         ),
     )
+}
+
+pub fn highlight(output_string: &str, highlight_term: &str) -> String {
+    /* find the highlight term in the output string and format the output 
+     * string to emphasize the highlight term in the output string
+     */
+
+    //println!("  {}", output_string); // debug
+
+    //println!("  {:#?}", path_str.to_string().split(&search_term).collect::<Vec<&str>>());
+
+    let tmp: String = output_string.clone().to_string();
+    let elements: Vec<&str> = tmp.split(&highlight_term).collect::<Vec<&str>>();
+
+    //print!("{:#?}", elements); // debug
+
+    // construct highlighted output
+    let mut o: String = String::new();
+
+    for i in 0..elements.len() {
+        if i < (elements.len() - 1) {
+            o.push_str(
+                &format!(
+                    "{}{}",
+                    color_grey_mouse(elements[i]),
+                    color_blue_smurf_bold(highlight_term),
+                )
+            );
+        } else {
+            o.push_str(
+                &format!(
+                    "{}",
+                    color_grey_mouse(elements[i]),
+                )
+            );
+        }
+    }
+
+    o
 }
