@@ -47,5 +47,5 @@ fn main() {
 
 fn show_help() {
     //TODO
-    println!("  \"( oh! hola. need some halp? )\"");
+    println!("  ( oh! hola. need some halp? )");
 }
