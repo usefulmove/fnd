@@ -150,7 +150,7 @@ pub fn highlight_filename(output_string: &str) -> String {
     let re: Regex = Regex::new(r"/([^/]+)$").unwrap();
 
     let filename: String = match re.captures(output_string) {
-        Some(c) => c[1].to_string(),
+        Some(n) => n[1].to_string(),
         None => "".to_string(),
     };
 
