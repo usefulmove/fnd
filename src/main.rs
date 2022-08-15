@@ -5,7 +5,7 @@ use ignore::{WalkBuilder, DirEntry};
 
 mod poc;
 
-const RELEASE_STATE: &str = "f";
+const RELEASE_STATE: &str = "g";
 
 fn main() {
     // enable or disable backtrace on error
