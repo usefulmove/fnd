@@ -1,7 +1,7 @@
 use regex::Regex;
 use std::env;
 use std::path::Path;
-use walkdir::{WalkDir, DirEntry};
+use ignore::{WalkBuilder, DirEntry};
 
 mod poc;
 
@@ -20,7 +20,7 @@ fn main() {
     //println!("{:#?}", args); // debug
 
     if args.len() <= 1 { // no arguments
-        for entry in WalkDir::new("./") {
+        for entry in WalkBuilder::new("./").hidden(true).build() {
             let entry: DirEntry = entry.unwrap();
             let path: &Path = entry.path();
             let path_str: &str = path.to_str().unwrap();
@@ -71,7 +71,7 @@ fn main() {
             /* simple search */
             let search_term: String = args[1].clone();
 
-            for entry in WalkDir::new("./") {
+            for entry in WalkBuilder::new("./").hidden(true).build() {
                 let entry: DirEntry = entry.unwrap();
                 let path: &Path = entry.path();
                 let path_str: &str = path.to_str().unwrap();
@@ -94,15 +94,14 @@ fn main() {
 
             match Regex::new(&reg_exp) {
                 Ok(re) => {
-                    for entry in WalkDir::new("./") {
+                    for entry in WalkBuilder::new("./").hidden(true).build() {
                         let entry: DirEntry = entry.unwrap();
                         let path: &Path = entry.path();
                         let path_str: &str = path.to_str().unwrap();
 
-                        //println!("  path:{}", path_str); // debug remove
+                        //println!("  path:{}", path_str); // debug
 
                         let matching_term: String = match re.captures(path_str) {
-                            //Some(n) => { println!("  n:{:#?}", n); n[0].to_string() } // debug remove
                             Some(n) => n[0].to_string(),
                             None => "".to_string(),
                         };
