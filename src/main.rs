@@ -5,13 +5,14 @@ use walkdir::{WalkDir, DirEntry};
 
 mod poc;
 
-const RELEASE_STATE: &str = "e";
+const RELEASE_STATE: &str = "f";
 
 fn main() {
     // enable or disable backtrace on error
     env::set_var("RUST_BACKTRACE", "0");
 
-    let mut mode: SearchMode = SearchMode::Simple;
+    // set default search mode
+    let mut mode: SearchMode = SearchMode::Regex;
 
     // get command arguments
     let mut args: Vec<String> = env::args().collect();
@@ -46,6 +47,13 @@ fn main() {
                 poc::color_white_bold(RELEASE_STATE),
             );
             return;
+        }
+        "--simble" | "-s" => {
+            // regular expression search
+            mode = SearchMode::Simple;
+
+            // remove flag argument
+            args.remove(1);
         }
         "--regex" | "-e" => {
             // regular expression search
@@ -117,9 +125,6 @@ fn main() {
                 }
             }
         }
-        SearchMode::Glob => {
-            println!("  file glob mode under construction"); // debug remove
-        }
     }
 
 
@@ -132,7 +137,6 @@ fn show_help() {
 }
 
 enum SearchMode {
-    Glob,
     Regex,
     Simple,
 }
