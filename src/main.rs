@@ -48,8 +48,8 @@ fn main() {
             );
             return;
         }
-        "--simble" | "-s" => {
-            // regular expression search
+        "--simple" | "-s" => {
+            // simple search
             mode = SearchMode::Simple;
 
             // remove flag argument
