@@ -18,6 +18,7 @@ fn main() {
     let mut args: Vec<String> = env::args().collect();
 
     //println!("{:#?}", args); // debug
+    let col = poc::Theme::new();
 
     if args.len() <= 1 { // no arguments
         for entry in WalkBuilder::new("./").hidden(true).build() {
@@ -26,7 +27,7 @@ fn main() {
             let path_str: &str = path.to_str().unwrap();
             println!(
                 "  {}",
-                poc::highlight_filename(path_str),
+                poc::highlight_filename(path_str, &col.white),
             );
         }
         return;
@@ -42,9 +43,9 @@ fn main() {
             // display version information
             println!(
                 "  {} {}{}",
-                poc::color_grey_mouse("fnd"),
-                poc::color_blue_smurf_bold(env!("CARGO_PKG_VERSION")),
-                poc::color_white_bold(RELEASE_STATE),
+                col.color_rgb("fnd", &col.grey_mouse),
+                col.color_rgb(env!("CARGO_PKG_VERSION"), &col.blue_smurf_bold),
+                col.color_rgb(RELEASE_STATE, &col.white_bold),
             );
             return;
         }
@@ -82,7 +83,7 @@ fn main() {
                         poc::highlight(
                             path_str,
                             &search_term,
-                            poc::color_blue_smurf_bold,
+                            &col.blue_smurf_bold,
                         ),
                     );
                 }
@@ -113,7 +114,7 @@ fn main() {
                                 poc::highlight(
                                     path_str,
                                     &matching_term,
-                                    poc::color_blue_smurf_bold,
+                                    &col.blue_smurf_bold,
                                 ),
                             );
                         }
