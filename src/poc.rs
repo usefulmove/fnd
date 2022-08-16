@@ -4,10 +4,10 @@ use colored::*;
 use regex::Regex;
 
 pub struct Color {
-    r: u8,
-    g: u8,
-    b: u8,
-    bold: bool,
+    pub r: u8,
+    pub g: u8,
+    pub b: u8,
+    pub bold: bool,
 }
 
 pub struct Theme {
@@ -19,6 +19,7 @@ pub struct Theme {
     pub grey_mouse: Color,
     pub orange_sherbet: Color,
     pub red: Color,
+    pub red_bold: Color,
     pub yellow_canary_bold: Color,
     pub white: Color,
     pub white_bold: Color,
@@ -75,6 +76,12 @@ impl Theme {
                 b: 73,
                 bold: false,
             },
+            red_bold: Color {
+                r: 241,
+                g: 95,
+                b: 73,
+                bold: true,
+            },
             yellow_canary_bold: Color {
                 r: 255,
                 g: 252,
@@ -111,26 +118,26 @@ impl Theme {
     
 }
 
-pub fn highlight(output_string: &str, highlight_term: &str, color: &Color) -> String {
+pub fn highlight(output_str: &str, highlight_term: &str, color: &Color) -> String {
     /* find the highlight term in the output string and format the output 
         * string to emphasize the highlight term in the output string
         */
 
-    let tmp: String = output_string.clone().to_string();
+    let tmp: String = output_str.to_string();
     let elements: Vec<&str> = tmp.split(&highlight_term).collect::<Vec<&str>>();
 
     //print!("{:#?}", elements); // debug
 
     // construct highlighted output
     let mut o: String = String::new();
-    let col = Theme::new();
+    let theme = Theme::new();
     for i in 0..elements.len() {
         if i < (elements.len() - 1) {
             o.push_str(
                 &format!(
                     "{}{}",
-                    col.color_rgb(elements[i], &col.grey_mouse),
-                    col.color_rgb(highlight_term, color),
+                    theme.color_rgb(elements[i], &theme.grey_mouse),
+                    theme.color_rgb(highlight_term, color),
                 )
             );
         }
@@ -138,7 +145,7 @@ pub fn highlight(output_string: &str, highlight_term: &str, color: &Color) -> St
             o.push_str(
                 &format!(
                     "{}",
-                    col.color_rgb(elements[i], &col.grey_mouse),
+                    theme.color_rgb(elements[i], &theme.grey_mouse),
                 )
             );
         }
@@ -147,16 +154,16 @@ pub fn highlight(output_string: &str, highlight_term: &str, color: &Color) -> St
     o
 }
 
-pub fn highlight_filename(output_string: &str, color: &Color) -> String {
+pub fn highlight_filename(output_str: &str, color: &Color) -> String {
     /* highlight everything following the last "/"
         */
 
     let re: Regex = Regex::new(r"/([^/]+)$").unwrap();
 
-    let filename: String = match re.captures(output_string) {
+    let filename: String = match re.captures(output_str) {
         Some(n) => n[1].to_string(),
         None => "".to_string(),
     };
 
-    highlight(output_string, &filename, color)
+    highlight(output_str, &filename, color)
 }
