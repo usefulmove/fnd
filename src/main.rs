@@ -39,6 +39,20 @@ fn main() {
             show_help();
             return;
         }
+        "--regex" | "-e" => {
+            // regular expression search
+            mode = SearchMode::Regex;
+
+            // remove flag argument
+            args.remove(1);
+        }
+        "--simple" | "-s" => {
+            // simple search
+            mode = SearchMode::Simple;
+
+            // remove flag argument
+            args.remove(1);
+        }
         "--version" => {
             // display version information
             println!(
@@ -48,20 +62,6 @@ fn main() {
                 col.color_rgb(RELEASE_STATE, &col.white_bold),
             );
             return;
-        }
-        "--simple" | "-s" => {
-            // simple search
-            mode = SearchMode::Simple;
-
-            // remove flag argument
-            args.remove(1);
-        }
-        "--regex" | "-e" => {
-            // regular expression search
-            mode = SearchMode::Regex;
-
-            // remove flag argument
-            args.remove(1);
         }
         _ => ()
     }
