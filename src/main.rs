@@ -14,30 +14,33 @@ fn main() {
     // set default search mode
     let mut mode: SearchMode = SearchMode::Regex;
 
+    // don't show hidden files by default
+    let mut ignore_hidden: bool = true;
+
     // get command arguments
     let mut args: Vec<String> = env::args().collect();
 
     //println!("{:#?}", args); // debug
     let col = poc::Theme::new();
 
-    if args.len() <= 1 { // no arguments
-        for entry in WalkBuilder::new("./").hidden(true).build() {
-            let entry: DirEntry = entry.unwrap();
-            let path: &Path = entry.path();
-            let path_str: &str = path.to_str().unwrap();
-            println!(
-                "  {}",
-                poc::highlight_filename(path_str, &col.white),
-            );
-        }
-        return;
+    // if no arguments are passed, behave as if help flag was passed
+    if args.len() <= 1 {
+        args.push("--help".to_string());
     }
+
 
     match args[1].as_str() {
         "--help" => {
             // display command usage information
             show_help();
             return;
+        }
+        "--hidden" | "-h" => {
+            // show hidden files
+            ignore_hidden = false;
+
+            // remove flag argument
+            args.remove(1);
         }
         "--regex" | "-e" => {
             // regular expression search
@@ -72,7 +75,7 @@ fn main() {
             /* simple search */
             let search_term: String = args[1].clone();
 
-            for entry in WalkBuilder::new("./").hidden(true).build() {
+            for entry in WalkBuilder::new("./").hidden(ignore_hidden).build() {
                 let entry: DirEntry = entry.unwrap();
                 let path: &Path = entry.path();
                 let path_str: &str = path.to_str().unwrap();
@@ -95,7 +98,7 @@ fn main() {
 
             match Regex::new(&reg_exp) {
                 Ok(re) => {
-                    for entry in WalkBuilder::new("./").hidden(true).build() {
+                    for entry in WalkBuilder::new("./").hidden(ignore_hidden).build() {
                         let entry: DirEntry = entry.unwrap();
                         let path: &Path = entry.path();
                         let path_str: &str = path.to_str().unwrap();
