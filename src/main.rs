@@ -136,7 +136,7 @@ fn main() {
 
 fn show_help() {
     //TODO
-    println!("  ( oh! hola. need halp? )");
+    println!("  ( oh hai. need some halp? )");
 }
 
 enum SearchMode {
