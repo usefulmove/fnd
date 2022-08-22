@@ -12,12 +12,13 @@ pub struct Color {
 }
 
 pub struct Theme {
-    pub blue_smurf: Color,
     pub blue_coffee_bold: Color,
+    pub blue_smurf: Color,
     pub blue_smurf_bold: Color,
     pub cream: Color,
     pub cream_bold: Color,
     pub charcoal_cream: Color,
+    pub green_eggs: Color,
     pub green_eggs_bold: Color,
     pub grey_mouse: Color,
     pub orange_sherbet: Color,
@@ -31,17 +32,17 @@ pub struct Theme {
 impl Theme {
     pub fn new() -> Self {
         Self {
-            blue_smurf: Color {
-                r: 0,
-                g: 128,
-                b: 255,
-                bold: false,
-            },
             blue_coffee_bold: Color {
                 r: 0,
                 g: 192,
                 b: 255,
                 bold: true,
+            },
+            blue_smurf: Color {
+                r: 0,
+                g: 128,
+                b: 255,
+                bold: false,
             },
             blue_smurf_bold: Color {
                 r: 0,
@@ -65,6 +66,12 @@ impl Theme {
                 r: 102,
                 g: 102,
                 b: 102,
+                bold: false,
+            },
+            green_eggs: Color {
+                r: 135,
+                g: 255,
+                b: 175,
                 bold: false,
             },
             green_eggs_bold: Color {
