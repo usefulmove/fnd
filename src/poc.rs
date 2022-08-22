@@ -103,15 +103,15 @@ impl Theme {
                 bold: true,
             },
             white: Color {
-                r: 249,
-                g: 247,
-                b: 236,
+                r: 255,
+                g: 255,
+                b: 255,
                 bold: false,
             },
             white_bold: Color {
-                r: 249,
-                g: 247,
-                b: 236,
+                r: 255,
+                g: 255,
+                b: 255,
                 bold: true,
             },
         }
@@ -129,38 +129,32 @@ impl Theme {
     pub fn color_blank(&self, _message: &str) -> ColoredString {
         "".truecolor(0, 0, 0)
     }
-    
+
 }
 
 pub fn highlight(output_str: &str, highlight_term: &str, color: &Color) -> String {
-    /* find the highlight term in the output string and format the output 
+    /* find the highlight term in the output string and format the output
         * string to emphasize the highlight term in the output string
         */
 
     let tmp: String = output_str.to_string();
     let elements: Vec<&str> = tmp.split(&highlight_term).collect::<Vec<&str>>();
 
-    //print!("{:#?}", elements); // debug
-
     // construct highlighted output
     let mut o: String = String::new();
     let theme = Theme::new();
     for i in 0..elements.len() {
         if i < (elements.len() - 1) {
-            o.push_str(
-                &format!(
-                    "{}{}",
-                    theme.color_rgb(elements[i], &theme.grey_mouse),
-                    theme.color_rgb(highlight_term, color),
-                )
+            o += &format!(
+                "{}{}",
+                theme.color_rgb(elements[i], &theme.grey_mouse),
+                theme.color_rgb(highlight_term, color),
             );
         }
         else {
-            o.push_str(
-                &format!(
-                    "{}",
-                    theme.color_rgb(elements[i], &theme.grey_mouse),
-                )
+            o += &format!(
+                "{}",
+                theme.color_rgb(elements[i], &theme.grey_mouse),
             );
         }
     }
@@ -169,8 +163,7 @@ pub fn highlight(output_str: &str, highlight_term: &str, color: &Color) -> Strin
 }
 
 pub fn highlight_filename(output_str: &str, color: &Color) -> String {
-    /* highlight everything following the last "/"
-        */
+    /* highlight everything following the last "/" */
 
     let re: Regex = Regex::new(r"/([^/]+)$").unwrap();
 

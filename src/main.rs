@@ -103,15 +103,17 @@ fn main() {
                         let path: &Path = entry.path();
                         let path_str: &str = path.to_str().unwrap();
 
-                        //println!("  path:{}", path_str); // debug
+                        //println!("  debug:path:{}", path_str);
+
+                        let no_match: String = "".to_string();
 
                         let matching_term: String = match re.captures(path_str) {
-                            Some(n) => n[0].to_string(),
-                            None => "".to_string(),
+                            Some(match_return) => match_return[0].to_string(),
+                            None => no_match.clone(),
                         };
 
-                        if matching_term != "".to_string() {
-                            //println!("  {}", path_str); // debug
+                        if matching_term != no_match {
+                            //println!("  debug:{}", col.color_rgb(path_str, &col.blue_smurf_bold));
                             println!(
                                 "  {}",
                                 poc::highlight(
