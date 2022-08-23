@@ -176,15 +176,24 @@ pub fn highlight(output_str: &str, highlight_term: &str, color: &Color) -> Strin
             let _ = write!(
                 o,
                 "{}{}",
-                theme.color_rgb(elements[i], &theme.grey_mouse),
-                theme.color_rgb(highlight_term, color),
+                theme.color_rgb(
+                    elements[i],
+                    &theme.grey_mouse
+                ),
+                theme.color_rgb(
+                    highlight_term,
+                    color
+                ),
             );
         }
         else {
             let _ = write!(
                 o,
                 "{}",
-                theme.color_rgb(elements[i], &theme.grey_mouse),
+                theme.color_rgb(
+                    elements[i],
+                    &theme.grey_mouse
+                ),
             );
         }
     }

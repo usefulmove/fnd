@@ -46,7 +46,10 @@ fn main() {
                 if verbose {
                     println!(
                         "  {}",
-                        color_theme.color_rgb("  verbose mode", &color_theme.orange_sherbet_bold),
+                        color_theme.color_rgb(
+                            "  verbose mode",
+                            &color_theme.orange_sherbet_bold
+                        ),
                     );
                 }
             }
@@ -61,7 +64,10 @@ fn main() {
                 if verbose {
                     println!(
                         "  {}",
-                        color_theme.color_rgb("  searching hidden files", &color_theme.orange_sherbet_bold),
+                        color_theme.color_rgb(
+                            "  searching hidden files",
+                            &color_theme.orange_sherbet_bold
+                        ),
                     );
                 }
             }
@@ -69,9 +75,18 @@ fn main() {
                 // display version information
                 println!(
                     "  {} {}{}",
-                    color_theme.color_rgb("fnd", &color_theme.grey_mouse),
-                    color_theme.color_rgb(env!("CARGO_PKG_VERSION"), &color_theme.blue_smurf_bold),
-                    color_theme.color_rgb(RELEASE_STATE, &color_theme.white_bold),
+                    color_theme.color_rgb(
+                        "fnd",
+                        &color_theme.grey_mouse
+                    ),
+                    color_theme.color_rgb(
+                        env!("CARGO_PKG_VERSION"),
+                        &color_theme.blue_smurf_bold
+                    ),
+                    color_theme.color_rgb(
+                        RELEASE_STATE,
+                        &color_theme.white_bold
+                    ),
                 );
                 return;
             }
@@ -79,7 +94,10 @@ fn main() {
                 args.remove(0); // remove flag
                 println!(
                     "  {}",
-                    color_theme.color_rgb("  verbose mode", &color_theme.orange_sherbet_bold),
+                    color_theme.color_rgb(
+                        "  verbose mode",
+                        &color_theme.orange_sherbet_bold
+                    ),
                 );
                 verbose = true;
             }
@@ -87,7 +105,10 @@ fn main() {
                 if args.len() > 1 {
                     eprintln!(
                         "  {}: incorrect use of command arguments",
-                        color_theme.color_rgb("error", &color_theme.red_bold),
+                        color_theme.color_rgb(
+                            "error",
+                            &color_theme.red_bold
+                        ),
                     );
                     std::process::exit(1);
                 }
@@ -97,7 +118,10 @@ fn main() {
                     if verbose {
                         println!(
                             "  search expression is \"{}\"",
-                            color_theme.color_rgb(&search_expr, &color_theme.blue_smurf_bold),
+                            color_theme.color_rgb(
+                                &search_expr,
+                                &color_theme.blue_smurf_bold
+                            ),
                         );
                     }
                 }
@@ -140,8 +164,11 @@ fn main() {
                 Err(e) => {
                     println!(
                         "  {}: {}",
-                        color_theme.color_rgb("error", &color_theme.red_bold),
-                         e,
+                        color_theme.color_rgb(
+                            "error",
+                            &color_theme.red_bold
+                        ),
+                        e,
                     );
                 }
             }
@@ -170,8 +197,8 @@ fn main() {
         */
     }
 
-
     std::process::exit(0);
+
 }
 
 fn show_help() {
