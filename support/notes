@@ -1,11 +1,2 @@
-examples
-% fnd ~ ./trunk ( specify multiple paths )
-
-only directories
-% fnd -d foobar
-
-only files
-% fnd -f foobar
-
-case insensitive ( by default )
-case sensitive ( by -c flag )
+case insensitive search ( by default )
+case sensitive search ( using --case-sensitive flag )

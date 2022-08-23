@@ -1,2 +1,2 @@
 # fnd
-A better find command
+simple find command
