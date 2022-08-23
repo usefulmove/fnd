@@ -22,6 +22,7 @@ pub struct Theme {
     pub green_eggs_bold: Color,
     pub grey_mouse: Color,
     pub orange_sherbet: Color,
+    pub orange_sherbet_bold: Color,
     pub red: Color,
     pub red_bold: Color,
     pub yellow_canary_bold: Color,
@@ -92,6 +93,12 @@ impl Theme {
                 b: 110,
                 bold: false,
             },
+            orange_sherbet_bold: Color {
+                r: 239,
+                g: 157,
+                b: 110,
+                bold: true,
+            },
             red: Color {
                 r: 241,
                 g: 95,
@@ -125,12 +132,23 @@ impl Theme {
         }
     }
 
-    pub fn color_rgb(&self, message: &str, color: &Color) -> ColoredString {
+    pub fn color_rgb(&self, content: &str, color: &Color) -> ColoredString {
         if !color.bold {
-            message.truecolor(color.r, color.g, color.b)
+            content.truecolor(color.r, color.g, color.b)
         }
         else {
-            message.truecolor(color.r, color.g, color.b).bold()
+            content.truecolor(color.r, color.g, color.b).bold()
+        }
+    }
+
+    pub fn color_rgb_bg(&self, content: &str, color: &Color) -> ColoredString {
+        let output: &str = &format!(" {} ", content); // pad output
+
+        if !color.bold {
+            output.truecolor(0, 0, 0).on_truecolor(color.r, color.g, color.b)
+        }
+        else {
+            output.truecolor(0, 0, 0).on_truecolor(color.r, color.g, color.b).bold()
         }
     }
 
