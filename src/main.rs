@@ -5,14 +5,14 @@ use ignore::{WalkBuilder, DirEntry};
 
 mod poc;
 
-const RELEASE_STATE: &str = "g";
+const RELEASE_STATE: &str = "h";
 
 fn main() {
     // enable or disable backtrace on error
     env::set_var("RUST_BACKTRACE", "0");
 
     // set default search mode
-    let mut mode: SearchMode = SearchMode::Regex;
+    let mode: SearchMode = SearchMode::Regex;
 
     // don't show hidden files by default
     let mut ignore_hidden: bool = true;
@@ -24,10 +24,11 @@ fn main() {
     let col = poc::Theme::new();
 
     // if no arguments are passed, behave as if help flag was passed
+    /*
     if args.len() <= 1 {
         args.push("--help".to_string());
     }
-
+    */
 
     match args[1].as_str() {
         "--help" => {
@@ -38,20 +39,6 @@ fn main() {
         "--hidden" | "-h" => {
             // show hidden files
             ignore_hidden = false;
-
-            // remove flag argument
-            args.remove(1);
-        }
-        "--regex" | "-e" => {
-            // regular expression search
-            mode = SearchMode::Regex;
-
-            // remove flag argument
-            args.remove(1);
-        }
-        "--simple" | "-s" => {
-            // simple search
-            mode = SearchMode::Simple;
 
             // remove flag argument
             args.remove(1);
@@ -71,27 +58,6 @@ fn main() {
 
     /* fnd core */
     match mode {
-        SearchMode::Simple => {
-            /* simple search */
-            let search_term: String = args[1].clone();
-
-            for entry in WalkBuilder::new("./").hidden(ignore_hidden).build() {
-                let entry: DirEntry = entry.unwrap();
-                let path: &Path = entry.path();
-                let path_str: &str = path.to_str().unwrap();
-                if path_str.contains(&search_term) {
-                    //println!("  {}", path_str); // debug
-                    println!(
-                        "  {}",
-                        poc::highlight(
-                            path_str,
-                            &search_term,
-                            &col.blue_smurf_bold,
-                        ),
-                    );
-                }
-            }
-        }
         SearchMode::Regex => {
             /* regular expression ( regex ) search */
             let reg_exp: String = args[1].clone();
@@ -130,6 +96,29 @@ fn main() {
                 }
             }
         }
+        /*
+        SearchMode::Simple => {
+            /* simple search */
+            let search_term: String = args[1].clone();
+
+            for entry in WalkBuilder::new("./").hidden(ignore_hidden).build() {
+                let entry: DirEntry = entry.unwrap();
+                let path: &Path = entry.path();
+                let path_str: &str = path.to_str().unwrap();
+                if path_str.contains(&search_term) {
+                    //println!("  {}", path_str); // debug
+                    println!(
+                        "  {}",
+                        poc::highlight(
+                            path_str,
+                            &search_term,
+                            &col.blue_smurf_bold,
+                        ),
+                    );
+                }
+            }
+        }
+        */
     }
 
 
@@ -137,11 +126,10 @@ fn main() {
 }
 
 fn show_help() {
+    println!("  ( oh hai! need halp? )");
     //TODO
-    println!("  ( oh hai. need some halp? )");
 }
 
 enum SearchMode {
     Regex,
-    Simple,
 }
