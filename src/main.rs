@@ -1,7 +1,7 @@
+use ignore::{WalkBuilder, DirEntry};
 use regex::Regex;
 use std::env;
 use std::path::Path;
-use ignore::{WalkBuilder, DirEntry};
 
 mod poc;
 
