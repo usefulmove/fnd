@@ -3,7 +3,7 @@ use regex::Regex;
 use std::env;
 use std::path::Path;
 
-mod poc;
+mod coq;
 
 const RELEASE_STATE: &str = "h";
 
@@ -26,17 +26,17 @@ fn main() {
     // get command arguments
     let mut args: Vec<String> = env::args().collect();
 
-    let color_theme = poc::Theme::new();
+    let color_theme = coq::Theme::new();
 
     args.remove(0); // remove the program name from arguments list
 
     // if no arguments are passed, behave as if help flag was passed
-    if args.len() < 1 {
+    if args.is_empty() {
         args.push("--help".to_string());
     }
 
     let mut search_expr: String = "".to_string();
-    while args.len() >= 1 {
+    while !args.is_empty() {
         match args[0].as_str() {
             "--dir" | "-d" => {
                 // set search directory
@@ -152,7 +152,7 @@ fn main() {
                         if matching_term != no_match {
                             println!(
                                 "  {}",
-                                poc::highlight(
+                                coq::highlight(
                                     path_str,
                                     &matching_term,
                                     &color_theme.blue_smurf_bold,
@@ -185,7 +185,7 @@ fn main() {
                 if path_str.contains(&search_term) {
                     println!(
                         "  {}",
-                        poc::highlight(
+                        coq::highlight(
                             path_str,
                             &search_term,
                             &color_theme.blue_smurf_bold,
