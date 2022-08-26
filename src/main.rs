@@ -3,8 +3,6 @@ use regex::Regex;
 use std::env;
 use std::path::Path;
 
-mod coq;
-
 const RELEASE_STATE: &str = "h";
 
 fn main() {
