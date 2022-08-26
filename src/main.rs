@@ -108,7 +108,7 @@ fn main() {
                             &color_theme.red_bold
                         ),
                     );
-                    std::process::exit(1);
+                    std::process::exit(exit_code::USAGE_ERROR);
                 }
                 if args.len() == 1 {
                     search_expr = args.remove(0); // get search expression
@@ -195,7 +195,7 @@ fn main() {
         */
     }
 
-    std::process::exit(0);
+    std::process::exit(exit_code::SUCCESS);
 
 }
 
