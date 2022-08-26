@@ -13,7 +13,7 @@ fn main() {
     let mode: SearchMode = SearchMode::Regex;
 
     // set default search directory
-    let mut dir: String = "./".to_string();
+    let mut dir: String = String::from("./");
 
     // set default verbosity
     let mut verbose: bool = false;
@@ -30,10 +30,10 @@ fn main() {
 
     // if no arguments are passed, behave as if help flag was passed
     if args.is_empty() {
-        args.push("--help".to_string());
+        args.push(String::from("--help"));
     }
 
-    let mut search_expr: String = "".to_string();
+    let mut search_expr: String = String::from("");
     while !args.is_empty() {
         match args[0].as_str() {
             "--dir" | "-d" => {
@@ -140,7 +140,7 @@ fn main() {
                         let path: &Path = entry.path();
                         let path_str: &str = path.to_str().unwrap();
 
-                        let no_match: String = "".to_string();
+                        let no_match: String = String::from("");
 
                         let matching_term: String = match re.captures(path_str) {
                             Some(match_return) => match_return[0].to_string(),
