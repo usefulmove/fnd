@@ -3,7 +3,7 @@ use regex::Regex;
 use std::env;
 use std::path::Path;
 
-const RELEASE_STATE: &str = "h";
+const RELEASE_STATE: &str = "a";
 
 fn main() {
     // enable or disable backtrace on error
