@@ -3,7 +3,7 @@ use regex::Regex;
 use std::env;
 use std::path::Path;
 
-const RELEASE_STATE: &str = "a";
+const RELEASE_STATE: &str = "";
 
 fn main() {
     // enable or disable backtrace on error
@@ -108,7 +108,7 @@ fn main() {
                             &color_theme.red_bold
                         ),
                     );
-                    std::process::exit(exit_code::USAGE_ERROR);
+                    std::process::exit(exitcode::USAGE);
                 }
                 if args.len() == 1 {
                     search_expr = args.remove(0); // get search expression
@@ -195,7 +195,7 @@ fn main() {
         */
     }
 
-    std::process::exit(exit_code::SUCCESS);
+    std::process::exit(exitcode::OK);
 
 }
 
