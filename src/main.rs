@@ -43,10 +43,10 @@ fn main() {
 
                 if verbose {
                     println!(
-                        "  {}",
+                        "  search directory: {}",
                         color_theme.color_rgb(
-                            "  verbose mode",
-                            &color_theme.orange_sherbet_bold
+                            &dir,
+                            &color_theme.yellow_canary
                         ),
                     );
                 }
@@ -60,13 +60,7 @@ fn main() {
                 args.remove(0); // remove flag
                 ignore_hidden = false; // show hidden files
                 if verbose {
-                    println!(
-                        "  {}",
-                        color_theme.color_rgb(
-                            "  searching hidden files",
-                            &color_theme.orange_sherbet_bold
-                        ),
-                    );
+                    println!("  searching hidden files");
                 }
             }
             "--version" => {
@@ -90,13 +84,7 @@ fn main() {
             }
             "--verbose" | "-v" => {
                 args.remove(0); // remove flag
-                println!(
-                    "  {}",
-                    color_theme.color_rgb(
-                        "  verbose mode",
-                        &color_theme.orange_sherbet_bold
-                    ),
-                );
+                println!("  verbose mode");
                 verbose = true;
             }
             _ => {
@@ -115,10 +103,10 @@ fn main() {
 
                     if verbose {
                         println!(
-                            "  search expression is \"{}\"",
+                            "  search expression: \"{}\"",
                             color_theme.color_rgb(
                                 &search_expr,
-                                &color_theme.blue_smurf_bold
+                                &color_theme.yellow_canary
                             ),
                         );
                     }
@@ -171,28 +159,6 @@ fn main() {
                 }
             }
         }
-        /*
-        SearchMode::Simple => {
-            /* simple search */
-            let search_term: String = args[0].clone();
-
-            for entry in WalkBuilder::new("./").hidden(ignore_hidden).build() {
-                let entry: DirEntry = entry.unwrap();
-                let path: &Path = entry.path();
-                let path_str: &str = path.to_str().unwrap();
-                if path_str.contains(&search_term) {
-                    println!(
-                        "  {}",
-                        coq::highlight(
-                            path_str,
-                            &search_term,
-                            &color_theme.blue_smurf_bold,
-                        ),
-                    );
-                }
-            }
-        }
-        */
     }
 
     std::process::exit(exitcode::OK);
