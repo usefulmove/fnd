@@ -183,8 +183,78 @@ fn main() {
 }
 
 fn show_help() {
-    println!("  ( oh hai! need halp? )");
-    //TODO
+    // color theme
+    let theme: coq::Theme = coq::Theme::new();
+
+    println!();
+    println!(
+        "{}",
+        theme.color_rgb("FND", &theme.cream_bold)
+    );
+    println!(
+        "    {} {} {} {}",
+        theme.color_rgb("fnd", &theme.grey_mouse),
+        theme.color_rgb("..", &theme.charcoal_cream),
+        theme.color_rgb("search for files that match a regular expression", &theme.cream_bold),
+        theme.color_rgb(env!("CARGO_PKG_VERSION"), &theme.grey_mouse),
+    );
+    println!();
+    println!(
+        "{}",
+        theme.color_rgb("USAGE", &theme.cream_bold)
+    );
+    println!(
+        "    {} {} {}",
+        theme.color_rgb("fnd", &theme.grey_mouse),
+        theme.color_rgb("[OPTIONS]", &theme.cream_bold),
+        theme.color_rgb("<regex>", &theme.blue_coffee_bold),
+    );
+    println!();
+    println!(
+        "{}",
+        theme.color_rgb("OPTIONS", &theme.cream_bold)
+    );
+    println!(
+        "        {}      show version",
+        theme.color_rgb("--version", &theme.orange_sherbet_bold),
+    );
+    println!(
+        "    {}{} {}          specify search directory",
+        theme.color_rgb("-d", &theme.orange_sherbet_bold),
+        theme.color_rgb(",", &theme.charcoal_cream),
+        theme.color_rgb("--dir", &theme.orange_sherbet_bold),
+    );
+    println!(
+        "    {}{} {}       search hidden files",
+        theme.color_rgb("-h", &theme.orange_sherbet_bold),
+        theme.color_rgb(",", &theme.charcoal_cream),
+        theme.color_rgb("--hidden", &theme.orange_sherbet_bold),
+    );
+    println!(
+        "        {}         show help information",
+        theme.color_rgb("--help", &theme.orange_sherbet_bold),
+    );
+    println!();
+    println!(
+        "{}",
+        theme.color_rgb("DESCRIPTION", &theme.cream_bold)
+    );
+    println!(
+        "The fnd command searches for files that match a regular expression {}. \
+        The non-hidden files in the current directory is searched by default. It \
+        is also possible to search a different directory by using the {} option \
+        followed by the directory to be searched. The search can be expanded to \
+        include hidden files by using the {} option.",
+        theme.color_rgb("<regex>", &theme.blue_coffee_bold),
+        theme.color_rgb("--dir", &theme.orange_sherbet_bold),
+        theme.color_rgb("--hidden", &theme.orange_sherbet_bold),
+    );
+    println!();
+    println!(
+        "    Repository:    {}",
+        theme.color_rgb("https://github.com/usefulmove/fnd#readme", &theme.grey_mouse),
+    );
+    println!();
 }
 
 enum SearchMode {
