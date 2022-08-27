@@ -123,8 +123,25 @@ fn main() {
 
             match Regex::new(&reg_exp) {
                 Ok(re) => {
-                    for entry in WalkBuilder::new(&dir).hidden(ignore_hidden).build() {
-                        let entry: DirEntry = entry.unwrap();
+                    for res in WalkBuilder::new(&dir).hidden(ignore_hidden).build() {
+                        let entry: DirEntry = match res {
+                            Ok(directory_entry) => directory_entry,
+                            Err(e) => {
+                                eprintln!(
+                                    "  {}: invalid path [{}]: {}",
+                                    color_theme.color_rgb(
+                                        "error",
+                                        &color_theme.red_bold
+                                    ),
+                                    color_theme.color_rgb(
+                                        &dir,
+                                        &color_theme.blue_smurf_bold,
+                                    ),
+                                    e,
+                                );
+                                std::process::exit(exitcode::OSFILE);
+                            }
+                        };
                         let path: &Path = entry.path();
                         let path_str: &str = path.to_str().unwrap();
 
