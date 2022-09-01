@@ -2,8 +2,9 @@ use ignore::{WalkBuilder, DirEntry};
 use regex::Regex;
 use std::env;
 use std::path::Path;
+use std::process::exit;
 
-const RELEASE_STATE: &str = "";
+const RELEASE_STATE: &str = "a";
 
 fn main() {
     // enable or disable backtrace on error
@@ -96,7 +97,7 @@ fn main() {
                             &color_theme.red_bold
                         ),
                     );
-                    std::process::exit(exitcode::USAGE);
+                    exit(exitcode::USAGE);
                 }
                 if args.len() == 1 {
                     search_expr = args.remove(0); // get search expression
@@ -139,7 +140,7 @@ fn main() {
                                     ),
                                     e,
                                 );
-                                std::process::exit(exitcode::OSFILE);
+                                exit(exitcode::OSFILE);
                             }
                         };
                         let path: &Path = entry.path();
@@ -178,7 +179,7 @@ fn main() {
         }
     }
 
-    std::process::exit(exitcode::OK);
+    exit(exitcode::OK);
 
 }
 
