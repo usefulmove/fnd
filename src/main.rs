@@ -4,7 +4,7 @@ use std::env;
 use std::path::Path;
 use std::process::exit;
 
-const RELEASE_STATE: &str = "a";
+const RELEASE_STATE: &str = "b";
 
 fn main() {
     // enable or disable backtrace on error
@@ -217,23 +217,23 @@ fn show_help() {
     );
     println!(
         "        {}      show version",
-        theme.color_rgb("--version", &theme.orange_sherbet_bold),
+        theme.color_rgb("--version", &theme.yellow_canary),
     );
     println!(
         "    {}{} {}          specify search directory",
-        theme.color_rgb("-d", &theme.orange_sherbet_bold),
+        theme.color_rgb("-d", &theme.yellow_canary),
         theme.color_rgb(",", &theme.charcoal_cream),
-        theme.color_rgb("--dir", &theme.orange_sherbet_bold),
+        theme.color_rgb("--dir", &theme.yellow_canary),
     );
     println!(
         "    {}{} {}       search hidden files",
-        theme.color_rgb("-h", &theme.orange_sherbet_bold),
+        theme.color_rgb("-h", &theme.yellow_canary),
         theme.color_rgb(",", &theme.charcoal_cream),
-        theme.color_rgb("--hidden", &theme.orange_sherbet_bold),
+        theme.color_rgb("--hidden", &theme.yellow_canary),
     );
     println!(
         "        {}         show help information",
-        theme.color_rgb("--help", &theme.orange_sherbet_bold),
+        theme.color_rgb("--help", &theme.yellow_canary),
     );
     println!();
     println!(
@@ -247,8 +247,8 @@ fn show_help() {
         followed by the directory to be searched. The search can be expanded to \
         include hidden files by using the {} option.",
         theme.color_rgb("<regex>", &theme.blue_coffee_bold),
-        theme.color_rgb("--dir", &theme.orange_sherbet_bold),
-        theme.color_rgb("--hidden", &theme.orange_sherbet_bold),
+        theme.color_rgb("--dir", &theme.yellow_canary_bold),
+        theme.color_rgb("--hidden", &theme.yellow_canary_bold),
     );
     println!();
     println!(
