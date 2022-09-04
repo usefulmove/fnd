@@ -185,7 +185,7 @@ fn main() {
 
 fn show_help() {
     // color theme
-    let theme: coq::Theme = coq::Theme::new();
+    let theme = coq::Theme::new();
 
     println!();
     println!(
