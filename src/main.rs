@@ -25,7 +25,7 @@ fn main() {
     // get command arguments
     let mut args: Vec<String> = env::args().collect();
 
-    let color_theme = coq::Theme::new();
+    let color_theme = cor::Theme::new();
 
     args.remove(0); // remove the program name from arguments list
 
@@ -156,7 +156,7 @@ fn main() {
                         if matching_term != no_match {
                             println!(
                                 "  {}",
-                                coq::highlight(
+                                cor::highlight(
                                     path_str,
                                     &matching_term,
                                     &color_theme.blue_smurf_bold,
@@ -185,7 +185,7 @@ fn main() {
 
 fn show_help() {
     // color theme
-    let theme = coq::Theme::new();
+    let theme = cor::Theme::new();
 
     println!();
     println!(
